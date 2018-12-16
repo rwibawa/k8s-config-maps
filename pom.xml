@@ -19,7 +19,7 @@
     <modules>
         <module>optimus-prime</module>
         <module>megatron</module>
-        <!--<module>gears</module>-->
-        <!--<module>shockwave</module>-->
+        <module>gears</module>
+        <module>shockwave</module>
     </modules>
 </project>

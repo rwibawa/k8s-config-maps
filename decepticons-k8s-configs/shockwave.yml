@@ -1,0 +1,64 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+ name: shockwave
+ labels:
+   serviceType: shockwave
+spec:
+ replicas: 2
+ strategy:
+   type: RollingUpdate
+   rollingUpdate:
+     maxUnavailable: 1
+     maxSurge: 1
+ template:
+   metadata:
+     name: shockwave
+     labels:
+       serviceType: shockwave
+   spec:
+     containers:
+       - name: shockwave
+         image: rwibawa/shockwave:latest
+         imagePullPolicy: Never
+         ports:
+           - name: http
+             containerPort: 8080
+             protocol: TCP
+         env:
+         - name: JAVA_OPTS
+           value: -Xmx64m -Xms64m
+         - name: TRANSFORMER_MODE
+           valueFrom:
+             configMapKeyRef:
+               name: decepticons-config
+               key: transformer.mode
+         livenessProbe:
+           httpGet:
+             path: /actuator/health
+             port: http
+           initialDelaySeconds: 40
+           timeoutSeconds: 1
+           periodSeconds: 15
+         readinessProbe:
+           httpGet:
+             path: /actuator/health
+             port: http
+           initialDelaySeconds: 40
+           timeoutSeconds: 1
+           periodSeconds: 15
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: shockwave-entrypoint
+ namespace: default
+spec:
+ selector:
+   serviceType: shockwave
+ ports:
+   - port: 8080
+     targetPort: 8080
+     nodePort: 30082
+ type: NodePort
