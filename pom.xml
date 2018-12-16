@@ -18,7 +18,7 @@
     <description>ConfigMaps Intro</description>
     <modules>
         <module>optimus-prime</module>
-        <!--<module>megatron</module>-->
+        <module>megatron</module>
         <!--<module>gears</module>-->
         <!--<module>shockwave</module>-->
     </modules>
