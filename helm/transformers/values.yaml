@@ -20,29 +20,29 @@ optimusprime:
      allegiance: autobots
      name: optimusprime
 
-#gears:
-#   image:
-#     repository: rwibawa/gears
-#   service:
-#     port: 30081
-#   transformer:
-#     allegiance: autobots
-#     name: gears
-#
-#megatron:
-#   image:
-#     repository: rwibawa/megatron
-#   service:
-#     port: 30082
-#   transformer:
-#     allegiance: decepticons
-#     name: megatron
-#
-#shockwave:
-#   image:
-#     repository: rwibawa/shockwave
-#   service:
-#     port: 30082
-#   transformer:
-#     allegiance: decepticons
-#     name: shockwave
+gears:
+   image:
+     repository: rwibawa/gears
+   service:
+     port: 30082
+   transformer:
+     allegiance: autobots
+     name: gears
+
+megatron:
+   image:
+     repository: rwibawa/megatron
+   service:
+     port: 30081
+   transformer:
+     allegiance: decepticons
+     name: megatron
+
+shockwave:
+   image:
+     repository: rwibawa/shockwave
+   service:
+     port: 30083
+   transformer:
+     allegiance: decepticons
+     name: shockwave

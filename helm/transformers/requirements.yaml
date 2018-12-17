@@ -7,21 +7,21 @@ dependencies:
     condition: optimusprime.enabled
     tags:
       - autobots
-#  - name: transformer
-#    version: 0.1.0
-#    alias: gears
-#    condition: gears.enabled
-#    tags:
-#      - autobots
-#  - name: transformer
-#    version: 0.1.0
-#    alias: megatron
-#    condition: megatron.enabled
-#    tags:
-#      - decepticons
-#  - name: transformer
-#    version: 0.1.0
-#    alias: shockwave
-#    condition: megatron.enabled
-#    tags:
-#      - decepticons
+  - name: transformer
+    version: 0.1.0
+    alias: gears
+    condition: gears.enabled
+    tags:
+      - autobots
+  - name: transformer
+    version: 0.1.0
+    alias: megatron
+    condition: megatron.enabled
+    tags:
+      - decepticons
+  - name: transformer
+    version: 0.1.0
+    alias: shockwave
+    condition: megatron.enabled
+    tags:
+      - decepticons

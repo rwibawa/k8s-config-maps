@@ -160,6 +160,103 @@ transformers1-optimusprime-65454d4577-nfdqh  1/1    Running  0         7m35s
 transformers1-optimusprime-65454d4577-wvvq2  1/1    Running  0         7m35s
 
 
-$ helm delete transformers1
+$ $ helm del --purge transformers1
 release "transformers1" deleted
+```
+
+### All charts:
+```bash
+$ helm install --name=transformers1 ./transformers/
+NAME:   transformers1
+LAST DEPLOYED: Sun Dec 16 19:42:11 2018
+NAMESPACE: default
+STATUS: DEPLOYED
+
+RESOURCES:
+==> v1/ConfigMap
+NAME                              DATA  AGE
+transformers1-autobots-config     1     7s
+transformers1-decepticons-config  1     7s
+
+==> v1/Service
+NAME                        TYPE      CLUSTER-IP     EXTERNAL-IP  PORT(S)          AGE
+transformers1-gears         NodePort  10.98.23.64    <none>       30081:31152/TCP  7s
+transformers1-megatron      NodePort  10.102.152.48  <none>       30082:32127/TCP  6s
+transformers1-optimusprime  NodePort  10.111.85.187  <none>       30080:32435/TCP  6s
+transformers1-shockwave     NodePort  10.104.168.64  <none>       30082:30866/TCP  6s
+
+==> v1/Deployment
+NAME                        DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
+transformers1-gears         2        2        2           0          6s
+transformers1-megatron      2        2        2           0          6s
+transformers1-optimusprime  2        2        2           0          6s
+transformers1-shockwave     2        2        2           0          6s
+
+==> v1/Pod(related)
+NAME                                         READY  STATUS             RESTARTS  AGE
+transformers1-gears-85c4cf8b9d-8vxdl         0/1    Pending            0         5s
+transformers1-gears-85c4cf8b9d-n9mzm         0/1    ContainerCreating  0         5s
+transformers1-megatron-58576f6d9f-7gwgr      0/1    ContainerCreating  0         5s
+transformers1-megatron-58576f6d9f-hwmmg      0/1    Pending            0         5s
+transformers1-optimusprime-65454d4577-875zf  0/1    Pending            0         5s
+transformers1-optimusprime-65454d4577-w8zzb  0/1    ContainerCreating  0         5s
+transformers1-shockwave-86d8985969-55rq4     0/1    Pending            0         5s
+transformers1-shockwave-86d8985969-q9w6g     0/1    ContainerCreating  0         5s
+
+
+$ kubectl port-forward svc/transformers1-megatron 30082:30082 &
+Forwarding from 127.0.0.1:30082 -> 8080
+Forwarding from [::1]:30082 -> 8080
+$ kubectl port-forward svc/transformers1-gears 30081:30081 &
+Forwarding from 127.0.0.1:30081 -> 8080
+Forwarding from [::1]:30081 -> 8080
+```
+
+## Upgrade helm charts:
+```bash
+$ helm upgrade transformers1 --recreate-pods --set autobots.mode=disguised,decepticons.mode=robot ./transformers/
+Release "transformers1" has been upgraded. Happy Helming!
+LAST DEPLOYED: Sun Dec 16 19:58:43 2018
+NAMESPACE: default
+STATUS: DEPLOYED
+
+RESOURCES:
+==> v1/ConfigMap
+NAME                              DATA  AGE
+transformers1-autobots-config     1     16m
+transformers1-decepticons-config  1     16m
+
+==> v1/Service
+NAME                        TYPE      CLUSTER-IP     EXTERNAL-IP  PORT(S)          AGE
+transformers1-gears         NodePort  10.98.23.64    <none>       30082:30873/TCP  16m
+transformers1-megatron      NodePort  10.102.152.48  <none>       30081:30429/TCP  16m
+transformers1-optimusprime  NodePort  10.111.85.187  <none>       30080:32435/TCP  16m
+transformers1-shockwave     NodePort  10.104.168.64  <none>       30083:31668/TCP  16m
+
+==> v1/Deployment
+NAME                        DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
+transformers1-gears         2        2        2           0          16m
+transformers1-megatron      2        2        2           0          16m
+transformers1-optimusprime  2        2        2           0          16m
+transformers1-shockwave     2        2        2           0          16m
+
+==> v1/Pod(related)
+NAME                                         READY  STATUS             RESTARTS  AGE
+transformers1-gears-85c4cf8b9d-8vxdl         1/1    Terminating        0         16m
+transformers1-gears-85c4cf8b9d-kfnlt         0/1    ContainerCreating  0         15s
+transformers1-gears-85c4cf8b9d-n9mzm         1/1    Terminating        0         16m
+transformers1-gears-85c4cf8b9d-sdqhk         0/1    ContainerCreating  0         15s
+transformers1-megatron-58576f6d9f-7gwgr      0/1    Terminating        0         16m
+transformers1-megatron-58576f6d9f-g5mxg      0/1    ContainerCreating  0         14s
+transformers1-megatron-58576f6d9f-hwmmg      1/1    Terminating        0         16m
+transformers1-megatron-58576f6d9f-p2zkk      0/1    ContainerCreating  0         13s
+transformers1-optimusprime-65454d4577-875zf  1/1    Terminating        0         16m
+transformers1-optimusprime-65454d4577-8jvr9  0/1    ContainerCreating  0         10s
+transformers1-optimusprime-65454d4577-bm9gh  0/1    ContainerCreating  0         11s
+transformers1-optimusprime-65454d4577-w8zzb  1/1    Terminating        0         16m
+transformers1-shockwave-86d8985969-4krfk     0/1    ContainerCreating  0         7s
+transformers1-shockwave-86d8985969-55rq4     1/1    Terminating        0         16m
+transformers1-shockwave-86d8985969-nrnwc     0/1    ContainerCreating  0         4s
+transformers1-shockwave-86d8985969-q9w6g     1/1    Terminating        0         16m
+
 ```
