@@ -1,0 +1,48 @@
+# Default values for transformers.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+autobots:
+   mode: robot
+decepticons:
+   mode: disguised
+
+tags:
+  autobots: true
+  decepticons: true
+
+optimusprime:
+   image:
+     repository: rwibawa/optimus-prime
+   service:
+     port: 30080
+   transformer:
+     allegiance: autobots
+     name: optimusprime
+
+#gears:
+#   image:
+#     repository: rwibawa/gears
+#   service:
+#     port: 30081
+#   transformer:
+#     allegiance: autobots
+#     name: gears
+#
+#megatron:
+#   image:
+#     repository: rwibawa/megatron
+#   service:
+#     port: 30082
+#   transformer:
+#     allegiance: decepticons
+#     name: megatron
+#
+#shockwave:
+#   image:
+#     repository: rwibawa/shockwave
+#   service:
+#     port: 30082
+#   transformer:
+#     allegiance: decepticons
+#     name: shockwave

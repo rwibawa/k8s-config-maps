@@ -1,0 +1,13 @@
+{{ if (.Values.tags.decepticons) and eq .Values.tags.decepticons true }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "transformers.fullname" . }}-decepticons-config
+  labels:
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app: {{ template "transformers.name" . }}
+data:
+  transformer.mode: {{ .Values.decepticons.mode }}
+{{ end }}
