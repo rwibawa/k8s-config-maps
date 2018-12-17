@@ -32,7 +32,7 @@ spec:
          - name: TRANSFORMER_MODE
            valueFrom:
              configMapKeyRef:
-               name: decepticons-config
+               name: decepticons-config-v2
                key: transformer.mode
          livenessProbe:
            httpGet:

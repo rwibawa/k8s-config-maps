@@ -47,3 +47,31 @@ optimus-prime-7989f696bf-vxvbw   0/1       Running   0          26s
 optimus-prime-7989f696bf-plp69   1/1       Running   0         49s
 optimus-prime-7989f696bf-2n5wg   1/1       Running   0         53s
 ```
+
+## Rolling update with config maps v2:
+Add `./decepticons-k8s-configs/decepticons-config-v2.yml`, and modify `megatron.yml` and `shockwave.yml` to use \
+`decepticons-config-v2`
+```bash
+$ kubectl apply -f decepticons-k8s-configs --record
+configmap/decepticons-config-v2 created
+configmap/decepticons-config configured
+deployment.apps/megatron configured
+service/megatron-entrypoint configured
+deployment.apps/shockwave configured
+service/shockwave-entrypoint configured
+$ kubectl get pods -l serviceType=megatron -w
+NAME                        READY     STATUS    RESTARTS   AGE
+megatron-766478b685-k4fnr   1/1       Running   0          2h
+megatron-79f9d8dd8-8ck42    0/1       Running   0          26s
+megatron-79f9d8dd8-qnsft    0/1       Running   0          26s
+megatron-79f9d8dd8-qnsft   1/1       Running   0         59s
+megatron-766478b685-k4fnr   1/1       Terminating   0         2h
+megatron-766478b685-k4fnr   0/1       Terminating   0         2h
+megatron-79f9d8dd8-8ck42   1/1       Running   0         1m
+megatron-766478b685-k4fnr   0/1       Terminating   0         2h
+megatron-766478b685-k4fnr   0/1       Terminating   0         2h
+$ kubectl get pods -l serviceType=megatron
+NAME                       READY     STATUS    RESTARTS   AGE
+megatron-79f9d8dd8-8ck42   1/1       Running   0          2m
+megatron-79f9d8dd8-qnsft   1/1       Running   0          2m
+```
