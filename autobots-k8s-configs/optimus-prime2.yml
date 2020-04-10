@@ -1,0 +1,60 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: optimus-prime
+ labels:
+   serviceType: optimus-prime
+spec:
+ selector:
+  matchLabels:
+   serviceType: optimus-prime
+ strategy:
+   type: Recreate
+ template:
+   metadata:
+     labels:
+       serviceType: optimus-prime
+   spec:
+     containers:
+     - image: localhost:32000/rwibawa/optimus-prime:1.1
+       name: optimus-prime
+       env:
+       - name: JAVA_OPTS
+         value: -Xmx64m -Xms64m
+       volumeMounts:
+       - name: application-config
+         mountPath: "/deployments/config"
+         readOnly: true
+       livenessProbe:
+         httpGet:
+           path: /actuator/health
+           port: http
+         initialDelaySeconds: 40
+         timeoutSeconds: 1
+         periodSeconds: 15
+       readinessProbe:
+         httpGet:
+           path: /actuator/health
+           port: http
+         initialDelaySeconds: 40
+         timeoutSeconds: 1
+         periodSeconds: 15
+     volumes:
+     - name: application-config
+       configMap:
+        name: autobots-config
+        items:
+        - key: application.properties
+          path: application.properties
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: optimus-prime
+spec:
+ ports:
+   - port: 8080
+ selector:
+   serviceType: optimus-prime
+ clusterIP: None

@@ -14,6 +14,11 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
+    <properties>
+        <java.version>1.8</java.version>
+        <docker-maven-plugin.version>0.33.0</docker-maven-plugin.version>
+    </properties>
+
     <name>Transformers</name>
     <description>ConfigMaps Intro</description>
     <modules>

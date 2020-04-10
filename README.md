@@ -2,7 +2,7 @@
 The project started with:
 * [Optimus Prime](/optimus-prime/README.md)
 
-## Commands:
+## 1. Commands:
 ```bash
 # Autobots
 $ kubectl create -f autobots-config.yml --save-config
@@ -29,7 +29,7 @@ deployment.apps "megatron" deleted
 service "megatron-entrypoint" deleted
 ```
 
-# Change config maps:
+# 2. Change config maps:
 ![Change config autobots config maps](data/ChangeConfig1.jpg)
 ```bash
 $ kubectl scale deployment/optimus-prime --replicas=0
@@ -48,7 +48,7 @@ optimus-prime-7989f696bf-plp69   1/1       Running   0         49s
 optimus-prime-7989f696bf-2n5wg   1/1       Running   0         53s
 ```
 
-## Rolling update with config maps v2:
+## 3. Rolling update with config maps v2:
 Add `./decepticons-k8s-configs/decepticons-config-v2.yml`, and modify `megatron.yml` and `shockwave.yml` to use \
 `decepticons-config-v2`
 ```bash
@@ -76,7 +76,7 @@ megatron-79f9d8dd8-8ck42   1/1       Running   0          2m
 megatron-79f9d8dd8-qnsft   1/1       Running   0          2m
 ```
 
-## Troubleshoot helm charts:
+## 4. Troubleshoot helm charts:
 ```bash
 $ helm init
 $HELM_HOME has been configured at /home/rwibawa/.helm.
@@ -98,7 +98,7 @@ tiller-deploy-74d5d98d7d-9bwfx          1/1       Running   0          2m
 $ kubectl logs --namespace kube-system tiller-deploy-74d5d98d7d-9bwfx
 ```
 
-## Helm Charts:
+## 5. Helm Charts:
 ```bash
 $ cd helm
 $ helm install --name=transformers1 ./transformers/
@@ -259,4 +259,12 @@ transformers1-shockwave-86d8985969-55rq4     1/1    Terminating        0        
 transformers1-shockwave-86d8985969-nrnwc     0/1    ContainerCreating  0         4s
 transformers1-shockwave-86d8985969-q9w6g     1/1    Terminating        0         16m
 
+```
+
+## 6. Config Map from `application.properties` file:
+```bash
+$ cd k8s-config-maps/autobots-k8s-configs/
+$ kubectl create configmap autobots-config --from-file=./application.properties
+$ kubectl get cm
+$ kubectl create -f optimus-prime2.yml
 ```
