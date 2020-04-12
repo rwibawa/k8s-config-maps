@@ -131,3 +131,20 @@ gangly-starfish         1               Sun Apr 12 01:19:13 2020        DEPLOYED
 
 $ helm delete --purge gangly-starfish
 ```
+
+## 4. GitHub docker registry
+[Configuring Docker for use with GitHub Packages](https://help.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages)
+```shell script
+# authenticate
+$ cat ~/github-token_hela-docker.txt | docker login docker.pkg.github.com -u rwibawa --password-stdin
+$ docker tag rwibawa/gears:1.0 docker.pkg.github.com/rwibawa/k8s-config-maps/gears:1.0
+$ docker push docker.pkg.github.com/rwibawa/k8s-config-maps/gears:1.0
+```
+
+## 5. Maven docker registry
+[Configuring Apache Maven for use with GitHub Packages](https://help.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-apache-maven-for-use-with-github-packages)
+* [settings.xml](../settings.xml)
+* [pom.xml](./pom.xml)
+```shell script
+$ mvn deploy
+```
