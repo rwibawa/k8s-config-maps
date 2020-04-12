@@ -146,5 +146,7 @@ $ docker push docker.pkg.github.com/rwibawa/k8s-config-maps/gears:1.0
 * [settings.xml](../settings.xml)
 * [pom.xml](./pom.xml)
 ```shell script
-$ mvn deploy
+$ mkdir -p ../.m2/repository
+$ ../mvnw clean deploy -Dmaven.test.skip=true \
+-Dmaven.repo.local=../.m2/repository -s ../settings.xml
 ```
