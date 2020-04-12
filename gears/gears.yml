@@ -24,15 +24,15 @@ spec:
          value: -Xmx64m -Xms64m
        livenessProbe:
          httpGet:
-           path: /actuator/health/liveness
-           port: 80
+           path: /actuator/health
+           port: 8080
          initialDelaySeconds: 40
          timeoutSeconds: 1
          periodSeconds: 15
        readinessProbe:
          httpGet:
            path: /actuator/health
-           port: 80
+           port: 8080
          initialDelaySeconds: 40
          timeoutSeconds: 1
          periodSeconds: 15
