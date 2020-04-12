@@ -91,3 +91,43 @@ $ ../mvnw fabric8:resource fabric8:helm \
 $ ll target/fabric8/helm/kubernetes/gears/
 $ helm install target/fabric8/helm/kubernetes/gears
 ```
+
+## 3. helm charts
+```sh
+$ helm create gears
+$ helm lint gears
+
+$ helm install ./gears
+NAME:   gangly-starfish
+LAST DEPLOYED: Sun Apr 12 01:19:13 2020
+NAMESPACE: rw-dev
+STATUS: DEPLOYED
+
+RESOURCES:
+==> v1/Deployment
+NAME                   AGE
+gangly-starfish-gears  0s
+
+==> v1/Pod(related)
+NAME                                    AGE
+gangly-starfish-gears-5c75b855f9-sbpjt  0s
+
+==> v1/Service
+NAME                   AGE
+gangly-starfish-gears  0s
+
+
+NOTES:
+1. Get the application URL by running these commands:
+  export POD_NAME=$(kubectl get pods --namespace rw-dev -l "app.kubernetes.io/name=gears,app.kubernetes.io/instance=gangly-starfish" -o jsonpath="{.items[0].metadata.name}")
+  echo "Visit http://127.0.0.1:8080 to use your application"
+  kubectl port-forward $POD_NAME 8080:80
+
+$ kubectl port-forward svc/gangly-starfish-gears 28080:8080 &
+
+$ helm ls
+NAME                    REVISION        UPDATED                         STATUS          CHART                   APP VERSION     NAMESPACE
+gangly-starfish         1               Sun Apr 12 01:19:13 2020        DEPLOYED        gears-0.1.0             1.0             rw-dev   
+
+$ helm delete --purge gangly-starfish
+```
