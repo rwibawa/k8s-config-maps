@@ -23,7 +23,7 @@ spec:
          image: rwibawa/megatron:latest
          imagePullPolicy: Never
          ports:
-           - name: http
+           - name: 80
              containerPort: 8080
              protocol: TCP
          env:
@@ -37,7 +37,7 @@ spec:
          livenessProbe:
            httpGet:
              path: /actuator/health
-             port: http
+             port: 80
            initialDelaySeconds: 40
            timeoutSeconds: 1
            periodSeconds: 15

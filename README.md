@@ -3,7 +3,7 @@ The project started with:
 * [Optimus Prime](/optimus-prime/README.md)
 
 ## 1. Commands:
-```bash
+```sh
 # Autobots
 $ kubectl create -f autobots-config.yml --save-config
 configmap/autobots-config created
@@ -32,13 +32,14 @@ service "megatron-entrypoint" deleted
 # 2. Change config maps:
 ![Change config autobots config maps](data/ChangeConfig1.jpg)
 ```bash
+# Or edit it with command line:
+$ kubectl edit cm/autobots-config-v2
+
 $ kubectl scale deployment/optimus-prime --replicas=0
 deployment.extensions/optimus-prime scaled
-15:40 $ kubectl get pods -l serviceType=optimus-prime
-No resources found.
-15:40 $ kubectl scale deployment/optimus-prime --replicas=3
+$ kubectl scale deployment/optimus-prime --replicas=3
 deployment.extensions/optimus-prime scaled
-15:40 $ kubectl get pods -l serviceType=optimus-prime -w
+$ watch kubectl get pods -l serviceType=optimus-prime -w
 NAME                             READY     STATUS              RESTARTS   AGE
 optimus-prime-7989f696bf-2n5wg   0/1       ContainerCreating   0          5s
 optimus-prime-7989f696bf-plp69   0/1       ContainerCreating   0          5s
@@ -268,3 +269,6 @@ $ kubectl create configmap autobots-config --from-file=./application.properties
 $ kubectl get cm
 $ kubectl create -f optimus-prime2.yml
 ```
+
+## 7. `kubernetes-maven-plugin`
+[Gears](/gears/README.md)

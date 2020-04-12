@@ -2,33 +2,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: optimus-prime
+ name: gears
  labels:
-   serviceType: optimus-prime
+   serviceType: gears
 spec:
  selector:
   matchLabels:
-   serviceType: optimus-prime
+   serviceType: gears
  strategy:
    type: Recreate
  template:
    metadata:
      labels:
-       serviceType: optimus-prime
+       serviceType: gears
    spec:
      containers:
-     - image: localhost:32000/rwibawa/optimus-prime:1.1
-       name: optimus-prime
+     - image: localhost:32000/rwibawa/gears:1.1
+       name: gears
        env:
        - name: JAVA_OPTS
          value: -Xmx64m -Xms64m
-       volumeMounts:
-       - name: application-config
-         mountPath: "/deployments/config"
-         readOnly: true
        livenessProbe:
          httpGet:
-           path: /actuator/health
+           path: /actuator/health/liveness
            port: 80
          initialDelaySeconds: 40
          timeoutSeconds: 1
@@ -40,21 +36,14 @@ spec:
          initialDelaySeconds: 40
          timeoutSeconds: 1
          periodSeconds: 15
-     volumes:
-     - name: application-config
-       configMap:
-        name: autobots-config
-        items:
-        - key: application.properties
-          path: application.properties
 ---
 apiVersion: v1
 kind: Service
 metadata:
- name: optimus-prime
+ name: gears
 spec:
  ports:
    - port: 8080
  selector:
-   serviceType: optimus-prime
+   serviceType: gears
  clusterIP: None

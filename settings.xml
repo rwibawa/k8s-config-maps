@@ -6,9 +6,20 @@
     <interactiveMode/>
     <usePluginRegistry/>
     <offline/>
-    <pluginGroups/>
+    <pluginGroups>
+        <pluginGroup>io.fabric8</pluginGroup>
+    </pluginGroups>
     <servers/>
     <mirrors/>
+<!--        <mirrors>
+        <mirror>
+            <id>google-maven-central</id>
+            <name>Google Maven Central</name>
+            <url>https://maven-central.storage.googleapis.com</url>
+            <mirrorOf>central</mirrorOf>
+        </mirror>
+    </mirrors>
+-->
     <proxies/>
     <profiles/>
     <activeProfiles/>
