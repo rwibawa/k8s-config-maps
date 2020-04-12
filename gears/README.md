@@ -150,3 +150,27 @@ $ mkdir -p ../.m2/repository
 $ ../mvnw clean deploy -Dmaven.test.skip=true \
 -Dmaven.repo.local=../.m2/repository -s ../settings.xml
 ```
+
+### 6. Create ImagePull token
+```json
+$ cat ~/.docker/config.json
+{
+	"auths": {
+		"docker.pkg.github.com": {
+			"auth": "cnd..."
+		}
+	}
+}
+```
+Copy the authentication part of the docker `config.json`. Then encrypt it with Base64. You can use the only version at [https://www.base64encode.org/](https://www.base64encode.org/).
+Copy the encrypted version and paste it into `rwibawa-github-docker-register-token.yaml`.
+```yaml
+$ cat ./rwibawa-github-docker-register-token.yaml
+apiVersion: v1
+data:
+  .dockerconfigjson: ewoJI..=
+kind: Secret
+metadata:
+  name: rwibawa-github-docker-register-token
+type: kubernetes.io/dockerconfigjson
+```

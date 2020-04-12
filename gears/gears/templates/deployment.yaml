@@ -45,6 +45,8 @@ spec:
             initialDelaySeconds: 180
             successThreshold: 1
           resources:
+      imagePullSecrets:
+        - name: rwibawa-github-docker-register-token
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
       nodeSelector:

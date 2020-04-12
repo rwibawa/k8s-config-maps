@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: localhost:32000/rwibawa/gears
-  tag: 1.1
+  repository: docker.pkg.github.com/rwibawa/k8s-config-maps/gears
+  tag: "1.0"
   pullPolicy: IfNotPresent
   env:
     JAVA_OPTS: "-Xmx64m -Xms64m"

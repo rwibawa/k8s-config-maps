@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  .dockerconfigjson: ewo...
+kind: Secret
+metadata:
+  name: rwibawa-github-docker-register-token
+type: kubernetes.io/dockerconfigjson
+
