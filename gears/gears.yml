@@ -22,6 +22,11 @@ spec:
        env:
        - name: JAVA_OPTS
          value: -Xmx64m -Xms64m
+       - name: TRANSFORMER_MODE
+         valueFrom:
+           configMapKeyRef:
+             name: autobots-config-v2
+             key: transformer.mode
        livenessProbe:
          httpGet:
            path: /actuator/health
